@@ -1,4 +1,4 @@
-﻿namespace GB_WebAppCource.Controllers
+﻿namespace GB_WebAppCource.DAL.Entities
 {
     public class Person
     {

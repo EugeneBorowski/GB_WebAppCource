@@ -1,7 +1,5 @@
-﻿using GB_WebAppCource.Controllers.Models;
-using GB_WebAppCource.Services;
+﻿using GB_WebAppCource.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
