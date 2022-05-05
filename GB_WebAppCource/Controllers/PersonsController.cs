@@ -1,4 +1,7 @@
-﻿using GB_WebAppCource.Services;
+﻿using System.Threading.Tasks;
+using GB_WebAppCource.Controllers.Models;
+using GB_WebAppCource.DAL.Entities;
+using GB_WebAppCource.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,51 +12,63 @@ namespace GB_WebAppCource.Controllers
     [ApiController]
     public class PersonsController : ControllerBase
     {
-        private readonly IPersonsService _service;
+        private readonly IService<PersonDto> _service;
 
-        public PersonsController(IPersonsService service)
+        public PersonsController(IService<PersonDto> service)
         {
             _service = service;
         }
 
         // GET: api/<PersonsController>
         [HttpGet("{id}")]
-        public IActionResult Get([FromRoute] int id)
+        public async Task<IActionResult> Get([FromRoute] int id)
         {
-            return Ok();
+            return Ok(await _service.Get(id));
         }
 
-        // GET api/<PersonsController>/5
-        [HttpGet("search?searchTerm={term}")]
-        public string Get([FromRoute] string term)
+        // GET: api/<PersonsController>/all
+        [HttpGet("all")]
+        public async Task<IActionResult> Get()
         {
-            return "value";
+            return Ok(await _service.GetAll());
         }
 
-        [HttpGet("?skip={from}&take={to}")]
-        public IActionResult Get([FromRoute] int from, int to)
+        // GET api/<PersonsController>/search?searchTerm={term}
+        [HttpGet("searchTerm={term}")]
+        public async Task<IActionResult> Get([FromRoute] string term)
         {
-            from = 5;
-            to = 10;
-            return Ok();
+            return Ok(await _service.Get(term));
+        }
+
+        // GET api/<PersonsController>/?skip={from}&take={to}
+        [HttpGet("skip={from}&take={to}")]
+        public async Task<IActionResult> Get([FromRoute] int from, int to)
+        {
+            return Ok(await _service.Get(from,to));
         }
 
         // POST api/<PersonsController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("create")]
+        public async Task<IActionResult> Post([FromBody] PersonDto person)
         {
+            await _service.Create(person);
+            return Ok();
         }
 
         // PUT api/<PersonsController>/5
-        [HttpPut]
-        public void Put([FromBody] string value)
+        [HttpPut("update")]
+        public async Task<IActionResult> Put([FromBody] PersonDto person)
         {
+            await _service.Update(person);
+            return Ok();
         }
 
         // DELETE api/<PersonsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
+            await _service.Delete(id);
+            return Ok();
         }
     }
 }

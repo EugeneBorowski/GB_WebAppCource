@@ -1,6 +1,7 @@
 ﻿using GB_WebAppCource.DAL.Entities;
 using GB_WebAppCource.DAL.Repository.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Task = System.Threading.Tasks.Task;
 
@@ -464,7 +465,6 @@ namespace GB_WebAppCource.DAL.Repository
         };
         #endregion
 
-
         public Task<Person> Get(int id)
         {
             foreach (var person in data)
@@ -475,9 +475,31 @@ namespace GB_WebAppCource.DAL.Repository
             return Task.FromResult<Person>(null);
         }
 
-        public Task<IEnumerable<Person>> GetAll()
+        public Task<Person> Get(string term)
         {
-            return Task.FromResult<IEnumerable<Person>>(data);
+            foreach (var person in data)
+            {
+                if (person.FirstName == term)
+                    return Task.FromResult(person);
+            }
+            return Task.FromResult<Person>(null);
+        }
+
+        public Task<IList<Person>> Get(int from, int to)
+        {
+            var a = new List<Person>();
+
+            foreach (var person in data)
+            {
+                if (person.Id >= from & person.Id <= to)
+                    a.Add(person);
+            }
+            return Task.FromResult<IList<Person>>(a);
+        }
+
+        public Task<IList<Person>> GetAll()
+        {
+            return Task.FromResult<IList<Person>>(data);
         }
 
         public Task Add(Person item)
@@ -487,34 +509,22 @@ namespace GB_WebAppCource.DAL.Repository
 
         public Task Update(Person item)
         {
-            var result = Task.Factory.StartNew(() =>
-                {
-                    for (var i = 0; i < data.Count; i++)
-                    {
-                        if (!data[i].Equals(item))
-                            data[i] = item;
-                        break;
-                    }
-                }
-            );
-            result.Wait();
-            return result;
+            return Task.Run(() =>
+            {
+                var index = data.IndexOf(item);
+                if (index != -1)
+                    data[index] = item;
+            });
         }
 
         public Task Delete(Person item)
         {
-            var result = Task.Factory.StartNew(() =>
-                {
-                    foreach (var person in data)
-                    {
-                        if (item.Equals(person))
-                        {
-                            data.Remove(item);
-                        }
-                    }
-                });
-            result.Wait();
-            return result;
+            return Task.Run(() =>
+            {
+                var index = data.IndexOf(item);
+                if (index != -1)
+                    data.Remove(item);
+            });
         }
     }
 }
