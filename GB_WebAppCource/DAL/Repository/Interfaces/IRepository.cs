@@ -8,13 +8,9 @@ namespace GB_WebAppCource.DAL.Repository.Interfaces
         Task<T> Get(int id);
         Task<T> Get(string id);
         Task<IList<T>> Get(int from, int to);
-
         Task<IList<T>> GetAll();
-
         Task Add(T item);
-
         Task Update(T item);
-
         Task Delete(T item);
     }
 }

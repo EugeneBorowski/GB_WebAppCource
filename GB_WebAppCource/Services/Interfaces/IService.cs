@@ -14,6 +14,5 @@ namespace GB_WebAppCource.Services.Interfaces
         Task Create(T item);
         Task Update(T item);
         Task Delete(int id);
-
     }
 }
