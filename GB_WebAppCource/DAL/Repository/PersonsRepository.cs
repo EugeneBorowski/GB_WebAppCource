@@ -487,14 +487,14 @@ namespace GB_WebAppCource.DAL.Repository
 
         public Task<IList<Person>> Get(int from, int to)
         {
-            var a = new List<Person>();
+            var list = new List<Person>();
 
             foreach (var person in data)
             {
                 if (person.Id >= from & person.Id <= to)
-                    a.Add(person);
+                    list.Add(person);
             }
-            return Task.FromResult<IList<Person>>(a);
+            return Task.FromResult<IList<Person>>(list);
         }
 
         public Task<IList<Person>> GetAll()
