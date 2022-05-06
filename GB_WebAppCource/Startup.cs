@@ -4,6 +4,7 @@ using GB_WebAppCource.DAL.Repository;
 using GB_WebAppCource.DAL.Repository.Interfaces;
 using GB_WebAppCource.Mapper;
 using GB_WebAppCource.Services;
+using GB_WebAppCource.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

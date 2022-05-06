@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Task = System.Threading.Tasks.Task;
 
 
-namespace GB_WebAppCource.Services
+namespace GB_WebAppCource.Services.Interfaces
 {
     public interface IService<T> where T:class
     {
