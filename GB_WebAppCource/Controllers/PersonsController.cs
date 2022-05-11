@@ -1,9 +1,7 @@
-﻿using System.Threading.Tasks;
-using GB_WebAppCource.Controllers.Models;
-using GB_WebAppCource.DAL.Entities;
-using GB_WebAppCource.Services;
+﻿using GB_WebAppCource.Controllers.Models;
 using GB_WebAppCource.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -45,7 +43,7 @@ namespace GB_WebAppCource.Controllers
         [HttpGet("skip={from}&take={to}")]
         public async Task<IActionResult> Get([FromRoute] int from, int to)
         {
-            return Ok(await _service.Get(from,to));
+            return Ok(await _service.Get(from, to));
         }
 
         // POST api/<PersonsController>

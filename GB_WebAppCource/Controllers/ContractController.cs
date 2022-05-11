@@ -9,7 +9,7 @@ namespace GB_WebAppCource.Controllers
     public class ContractController : ControllerBase
     {
         // GET: api/<InvoiceController>
-        [HttpGet("/getall")]
+        [HttpGet("getall")]
         public IActionResult GetAll()
         {
             return Ok();
