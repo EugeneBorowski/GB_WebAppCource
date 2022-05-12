@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GB_WebAppCource.DAL.Repository.Database
 {
-    public class Context : DbContext
+    public sealed class Context : DbContext
     {
         public DbSet<Person> Person { get; set; }
 

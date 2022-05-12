@@ -35,7 +35,7 @@ namespace GB_WebAppCource
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "GB_WebAppCource", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Persons", Version = "v1" });
             });
 
             services.AddControllers();
